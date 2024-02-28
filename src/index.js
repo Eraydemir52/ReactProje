@@ -1,11 +1,14 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
+import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
+import { MantineProvider } from "@mantine/core";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
+ReactDOM.render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <MantineProvider withGlobalStyles withNormalizeCSS>
+      <App />
+    </MantineProvider>
+  </React.StrictMode>,
+  document.getElementById("root")
 );

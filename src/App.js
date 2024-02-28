@@ -1,4 +1,5 @@
 // import logo from "./logo.svg";
+import { Container, Grid, Stack, Button, Input, Textarea } from "@mantine/core";
 import "./App.css";
 import Card from "./components/Card";
 import { useState } from "react";
@@ -19,42 +20,62 @@ let arr = [
     title: "Dağ 3",
     par: "Açıklama 3",
   },
+  {
+    id: 4,
+    title: "Dağ 4",
+    par: "Açıklama 4",
+  },
 ];
 // const kare = (sayi) => sayi * sayi;
 const App = () => {
+  const [title, setTitle] = useState("");
+  const [paragraf, setParagraph] = useState("");
+  const [list, setList] = useState(arr);
   const [lesson, setLesson] = useState(11);
+  const click = () => {
+    console.log("Butona tıklandı", title, paragraf);
+    setTitle("");
+    setParagraph("");
+    const copList = [...list];
+    copList.push({
+      id: 5,
+      title,
+      par: paragraf,
+    });
+    setList(copList);
+  };
   return (
-    <div>
-      <h1>Başlık</h1>
-      <h2>Ders {lesson}</h2>
-      <button
-        onClick={() => {
-          setLesson(lesson + 1);
-        }}
-      >
-        Ders Arttır
-      </button>
-
-      <button
-        onClick={() => {
-          setLesson(lesson - 1);
-        }}
-      >
-        Ders Azalt
-      </button>
-      <p>Başlangıç</p>
-      <div className="Cards">
-        {arr.map(({ title, par }, i) => (
-          <Card
-            key={`index ${i}`}
-            title={title}
-            par={par}
-            lesson={lesson}
-            index={i}
+    <Container>
+      <h1>Kart Oluşturma Programı</h1>
+      <Stack>
+        <Input.Wrapper label="Paragraf">
+          <Input
+            placeholder="Başlık yazınız"
+            width={400}
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
           />
+        </Input.Wrapper>
+
+        <Textarea
+          label="Paragraf"
+          placeholder="Paragraf"
+          value={paragraf}
+          onChange={(e) => setParagraph(e.target.value)}
+        />
+        <Button variant="outline" onClick={click}>
+          Kart Oluştur
+        </Button>
+      </Stack>
+      <h2>Kartlar</h2>
+      <Grid>
+        {list.map(({ title, par }, i) => (
+          <Grid.Col span={4} key={`index ${i}`}>
+            <Card title={title} par={par} lesson={lesson} index={i} />
+          </Grid.Col>
         ))}
-      </div>
-    </div>
+      </Grid>
+    </Container>
   );
 };
 
