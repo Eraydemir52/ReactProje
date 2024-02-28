@@ -1,4 +1,4 @@
-import { Card, Image, Text, Badge, Button, Group } from "@mantine/core";
+import { Card, CloseButton, Image, Text, Button, Group } from "@mantine/core";
 
 // function Card({ title, par }) {
 //   return (
@@ -10,7 +10,7 @@ import { Card, Image, Text, Badge, Button, Group } from "@mantine/core";
 //   );
 // }
 //Arrow fonksiyon yukardakinin aynısı
-const CardComponent = ({ title, par, lesson, index }) => {
+const CardComponent = ({ title, par, click, i }) => {
   return (
     <Card shadow="sm" padding="lg" radius="md" withBorder>
       <Card.Section>
@@ -21,9 +21,14 @@ const CardComponent = ({ title, par, lesson, index }) => {
         />
       </Card.Section>
 
-      <Group justify="space-between" mt="md" mb="xs">
+      <Group position="apart" mt="md" mb="xs">
         <Text fw={500}>{title}</Text>
-        {/* <Badge color="pink">On Sale</Badge> */}
+        <CloseButton
+          radius="md"
+          aria-label="Close modal"
+          onClick={click}
+          style={{ position: "absolute", top: 0, right: 0 }}
+        />
       </Group>
 
       <Text size="sm" c="dimmed">
